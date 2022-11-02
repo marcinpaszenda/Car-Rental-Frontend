@@ -1,57 +1,58 @@
 package com.carrentalfrontend;
 
-import com.carrentalfrontend.domain.Car;
+import com.carrentalfrontend.dto.CarDto;
+import com.carrentalfrontend.dto.CarRentDto;
+import com.carrentalfrontend.dto.DriverDto;
+import com.carrentalfrontend.service.CarRentService;
 import com.carrentalfrontend.service.CarService;
-import com.vaadin.flow.component.button.Button;
+import com.carrentalfrontend.service.DriverService;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 @Route
 public class MainView extends VerticalLayout {
 
+    Grid<CarRentDto> grid = new Grid<>(CarRentDto.class);
+    Grid<DriverDto> driverGrid = new Grid<>(DriverDto.class);
+    Grid<CarDto> carGrid = new Grid<>(CarDto.class);
+
+    private CarRentService carRentService = CarRentService.getInstance();
+    private DriverService driverService = DriverService.getInstance();
     private CarService carService = CarService.getInstance();
-    private Grid<Car> grid = new Grid<>(Car.class);
-    private TextField filter = new TextField();
-    private CarForm form = new CarForm(this);
-    private Button addNewCar = new Button("Add new car");
-
-
 
     public MainView() {
-        filter.setPlaceholder("Filter by car brand");
-        filter.setClearButtonVisible(true);
-        filter.setValueChangeMode(ValueChangeMode.EAGER);
-        filter.addValueChangeListener(e -> update());
-        grid.setColumns("carBrand", "registrationNumber", "carMileage", "vinNumber", "carClass");
-
-        addNewCar.addClickListener(e -> {
-            grid.asSingleSelect().clear();
-            form.setCar(new Car());
-        });
-        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewCar);
-
-        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
-        mainContent.setSizeFull();
-        grid.setSizeFull();
-
-        add(toolbar, mainContent);
-        form.setCar(null);
+        addClassName("car-rents-name");
         setSizeFull();
-        refresh();
+        configureCarRentGrid();
 
-        grid.asSingleSelect().addValueChangeListener(event -> form.setCar(grid.asSingleSelect().getValue()));
+        add(grid, driverGrid);
+        updateList();
+
     }
 
-    private void update() {
-        grid.setItems(carService.findByCarBrand(filter.getValue()));
+    private void configureCarRentGrid() {
+        grid.addClassName("car-rental-grid");
+        grid.setSizeFull();
+        grid.setColumns("rentalDate", "rentalHour", "deposit");
+
+        driverGrid.setColumns("driverName", "drivingLicenseNumber", "phoneNumber");
+
+        grid.addColumn(carRentDto -> {
+            CarDto carDto = carRentDto.getCarDto();
+            return carDto == null ? "-" : carDto.getCarBrand();
+        }).setHeader("Car");
+
+
+        grid.getColumns().forEach(col -> col.setAutoWidth(true));
+
     }
 
-    public void refresh() {
-        grid.setItems(carService.getCars());
+
+    private void updateList() {
+        grid.setItems(carRentService.getAllCarRents());
+        driverGrid.setItems(driverService.getAllDrivers());
+
     }
+
 }
