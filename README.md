@@ -30,7 +30,7 @@ The project uses the following technologies and tools to work properly:
 ### Project status
 
 I created a backend application that supports the database and deployed it to heroku. 
-This application connects to the front using RestTemplete. I am currently starting work on a GUI with Vaadin. 
+This application connects to the front using RestTemplate. I am currently starting work on a GUI with Vaadin. 
 Then I will start developing new functionalities.
 
 
@@ -81,7 +81,7 @@ Projekt wykorzystuje następujące technologie i narzędzia:
 ### Status projektu
 
 Wstępnie utworzyłem aplikację backendową która obsługuje bazę danych i wdrożyłem ją za pomocą narzędzia heroku. 
-Aplikacja ta łączy się z frontem za pomocą RestTemplete. Aktualnie zaczynam pracę nad GUI wykorzystując do tego framework Vaadin. 
+Aplikacja ta łączy się z frontem za pomocą RestTemplate. Aktualnie zaczynam pracę nad GUI wykorzystując do tego framework Vaadin. 
 Po tym etapie zacznę dodawać i rozwijać kolejne funkcjonalności.
 
 
