@@ -13,6 +13,10 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    enabled = true
+}
+
 ext {
     set('vaadinVersion', "23.2.5")
 }

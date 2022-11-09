@@ -7,6 +7,8 @@ import com.carrentalfrontend.domain.Currency;
 import com.carrentalfrontend.service.CarRentService;
 import com.carrentalfrontend.service.CarService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -18,6 +20,8 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.shared.Registration;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,6 +31,7 @@ public class CarRentalForm extends FormLayout {
     private CarRentalView carRentalView;
     private CarRentService carRentService = CarRentService.getInstance();
     private CarService carService = CarService.getInstance();
+    private CarRentalForm carRentalForm;
 
     private DatePicker rentalDate = new DatePicker("Rental date", LocalDate.now());
     private TimePicker rentalHour = new TimePicker("Rental hour");
@@ -65,8 +70,8 @@ public class CarRentalForm extends FormLayout {
 
 
         currency.setItems(Currency.values());
-        rentalHour.setValue(LocalTime.now());
-        returnHour.setValue(LocalTime.now().plusHours(5));
+//        rentalHour.setValue(LocalTime.now());
+//        returnHour.setValue(LocalTime.now().plusHours(5));
         dailyMileageLimit.setItems(true, false);
         add(
                 car,
@@ -89,15 +94,17 @@ public class CarRentalForm extends FormLayout {
                 createButtonLayout()
         );
 
-        save.addClickListener(event -> save());
-        delete.addClickListener(event -> delete());
-        cancel.addClickListener(event -> cancel());
     }
 
     private Component createButtonLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+
+        save.addClickListener(event -> save());
+        delete.addClickListener(event -> delete());
+        cancel.addClickListener(event -> cancel());
+
 
         save.addClickShortcut(Key.ENTER);
         cancel.addClickShortcut(Key.ESCAPE);
@@ -118,8 +125,9 @@ public class CarRentalForm extends FormLayout {
     }
 
     public void cancel() {
-        carRentalView.updateList();
+        carRentalView.closeForm();
     }
+
 
     public void setCarRent(CarRent carRent) {
         binder.setBean(carRent);
@@ -128,8 +136,8 @@ public class CarRentalForm extends FormLayout {
             setVisible(false);
         } else {
             setVisible(true);
-            rentalDate.focus();
-
+//            rentalDate.focus();
         }
     }
+
 }

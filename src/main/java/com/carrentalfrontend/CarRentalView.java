@@ -35,13 +35,19 @@ public class CarRentalView extends VerticalLayout {
 
         add(getToolbar(), getContent());
 
-        carRentalForm.setCarRent(null);
         update();
         setSizeFull();
         updateList();
+        closeForm();
 
         grid.asSingleSelect().addValueChangeListener(event -> carRentalForm.setCarRent(grid.asSingleSelect().getValue()));
 
+    }
+
+    public void closeForm() {
+        carRentalForm.setCarRent(null);
+        carRentalForm.setVisible(false);
+        removeClassName("editing");
     }
 
     private Component getContent() {
@@ -53,7 +59,7 @@ public class CarRentalView extends VerticalLayout {
 
     private void configureForm() {
         carRentalForm = new CarRentalForm(this);
-        carRentalForm.setWidth("25em");
+        carRentalForm.setWidth("100em");
     }
 
     private Component getToolbar() {
@@ -63,10 +69,10 @@ public class CarRentalView extends VerticalLayout {
         filterText.addValueChangeListener(e -> update());
 
         Button addNewCarRental = new Button("Nowy wynajem");
-
         addNewCarRental.addClickListener(event -> {
             grid.asSingleSelect().clear();
             carRentalForm.setCarRent(new CarRent());
+
         });
 
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addNewCarRental);
