@@ -1,11 +1,11 @@
-package com.carrentalfrontend.dto;
+package com.carrentalfrontend.domain;
 
 import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarReleaseReportDto {
+public class CarReleaseReport {
 
     private Long carReleaseReportId;
     private boolean cleanCarBody;
@@ -14,3 +14,4 @@ public class CarReleaseReportDto {
     private Long carMileage;
     private String remarks;
 }
+

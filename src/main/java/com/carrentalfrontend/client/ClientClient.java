@@ -1,6 +1,6 @@
 package com.carrentalfrontend.client;
 
-import com.carrentalfrontend.dto.ClientDto;
+import com.carrentalfrontend.domain.Client;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +29,9 @@ public class ClientClient {
         return clientClient;
     }
 
-    public List<ClientDto> getAllClients() {
+    public List<Client> getAllClients() {
         try {
-            ResponseEntity<ClientDto[]> responseEntity = restTemplate.getForEntity(CLIENT_URL, ClientDto[].class);
+            ResponseEntity<Client[]> responseEntity = restTemplate.getForEntity(CLIENT_URL, Client[].class);
             return Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
@@ -39,17 +39,17 @@ public class ClientClient {
         }
     }
 
-    public void saveNewClient(ClientDto clientDto) {
+    public void saveNewClient(Client client) {
         try {
-            restTemplate.postForObject(CLIENT_URL, clientDto, Void.class);
+            restTemplate.postForObject(CLIENT_URL, client, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
     }
 
-    public void updateClient(ClientDto clientDto) {
+    public void updateClient(Client client) {
         try {
-            restTemplate.put(CLIENT_URL, clientDto, Void.class);
+            restTemplate.put(CLIENT_URL, client, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }

@@ -1,6 +1,6 @@
 package com.carrentalfrontend.client;
 
-import com.carrentalfrontend.dto.CarReleaseReportDto;
+import com.carrentalfrontend.domain.CarReleaseReport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +29,9 @@ public class CarReleaseReportClient {
         return carReleaseReportClient;
     }
 
-    public List<CarReleaseReportDto> getAllCarReleaseReport() {
+    public List<CarReleaseReport> getAllCarReleaseReport() {
         try {
-            ResponseEntity<CarReleaseReportDto[]> responseEntity = restTemplate.getForEntity(CAR_RELEASE_REPORT_URL, CarReleaseReportDto[].class);
+            ResponseEntity<CarReleaseReport[]> responseEntity = restTemplate.getForEntity(CAR_RELEASE_REPORT_URL, CarReleaseReport[].class);
             return Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
@@ -39,17 +39,17 @@ public class CarReleaseReportClient {
         }
     }
 
-    public void saveNewCarReleaseReport(CarReleaseReportDto carReleaseReportDto) {
+    public void saveNewCarReleaseReport(CarReleaseReport carReleaseReport) {
         try {
-            restTemplate.postForObject(CAR_RELEASE_REPORT_URL, carReleaseReportDto, Void.class);
+            restTemplate.postForObject(CAR_RELEASE_REPORT_URL, carReleaseReport, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
     }
 
-    public void updateCarReleaseReport(CarReleaseReportDto carReleaseReportDto) {
+    public void updateCarReleaseReport(CarReleaseReport carReleaseReport) {
         try {
-            restTemplate.put(CAR_RELEASE_REPORT_URL, carReleaseReportDto, Void.class);
+            restTemplate.put(CAR_RELEASE_REPORT_URL, carReleaseReport, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }

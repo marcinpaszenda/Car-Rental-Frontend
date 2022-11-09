@@ -1,7 +1,7 @@
 package com.carrentalfrontend.service;
 
 import com.carrentalfrontend.client.CarReturnReportClient;
-import com.carrentalfrontend.dto.CarReturnReportDto;
+import com.carrentalfrontend.domain.CarReturnReport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +21,16 @@ public class CarReturnReportService {
         return carReturnReportService;
     }
 
-    public List<CarReturnReportDto> getAllCarReturnReports() {
+    public List<CarReturnReport> getAllCarReturnReports() {
         return carReturnReportClient.getAllCarReturnReports();
     }
 
-    public void  saveNewCarReturnReport(CarReturnReportDto carReturnReportDto) {
-        carReturnReportClient.saveNewCarReturnReport(carReturnReportDto);
+    public void  saveNewCarReturnReport(CarReturnReport carReturnReport) {
+        carReturnReportClient.saveNewCarReturnReport(carReturnReport);
     }
 
-    public void updateCarReturnReport(CarReturnReportDto carReturnReportDto) {
-        carReturnReportClient.updateCarReturnReport(carReturnReportDto);
+    public void updateCarReturnReport(CarReturnReport carReturnReport) {
+        carReturnReportClient.updateCarReturnReport(carReturnReport);
     }
 
     public void deleteCArReturnReport(Long carReturnReportId) {

@@ -1,6 +1,6 @@
 package com.carrentalfrontend.client;
 
-import com.carrentalfrontend.dto.CarReturnReportDto;
+import com.carrentalfrontend.domain.CarReturnReport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +29,9 @@ public class CarReturnReportClient {
         return carReturnReportClient;
     }
 
-    public List<CarReturnReportDto> getAllCarReturnReports() {
+    public List<CarReturnReport> getAllCarReturnReports() {
         try {
-            ResponseEntity<CarReturnReportDto[]> responseEntity = restTemplate.getForEntity(CAR_RETURN_REPORT_URL, CarReturnReportDto[].class);
+            ResponseEntity<CarReturnReport[]> responseEntity = restTemplate.getForEntity(CAR_RETURN_REPORT_URL, CarReturnReport[].class);
             return Arrays.asList((Objects.requireNonNull(responseEntity.getBody())));
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
@@ -39,16 +39,16 @@ public class CarReturnReportClient {
         }
     }
 
-    public void saveNewCarReturnReport(CarReturnReportDto carReturnReportDto) {
+    public void saveNewCarReturnReport(CarReturnReport carReturnReport) {
         try {
-            restTemplate.postForObject(CAR_RETURN_REPORT_URL, carReturnReportDto, Void.class);
+            restTemplate.postForObject(CAR_RETURN_REPORT_URL, carReturnReport, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
     }
-    public void updateCarReturnReport(CarReturnReportDto carReturnReportDto) {
+    public void updateCarReturnReport(CarReturnReport carReturnReport) {
         try {
-            restTemplate.put(CAR_RETURN_REPORT_URL, carReturnReportDto, Void.class);
+            restTemplate.put(CAR_RETURN_REPORT_URL, carReturnReport, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }

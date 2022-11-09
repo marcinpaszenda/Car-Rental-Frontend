@@ -1,6 +1,6 @@
 package com.carrentalfrontend.client;
 
-import com.carrentalfrontend.dto.DriverDto;
+import com.carrentalfrontend.domain.Driver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +29,9 @@ public class DriverClient {
         return driverClient;
     }
 
-    public List<DriverDto> getAllDrivers() {
+    public List<Driver> getAllDrivers() {
         try {
-            ResponseEntity<DriverDto[]> responseEntity = restTemplate.getForEntity(DRIVER_URL, DriverDto[].class);
+            ResponseEntity<Driver[]> responseEntity = restTemplate.getForEntity(DRIVER_URL, Driver[].class);
             return Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
@@ -39,15 +39,15 @@ public class DriverClient {
         }
     }
 
-    public void saveNewDriver(DriverDto driverDto) {
+    public void saveNewDriver(Driver driver) {
         try {
-            restTemplate.postForObject(DRIVER_URL, driverDto, Void.class);
+            restTemplate.postForObject(DRIVER_URL, driver, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
     }
 
-    public void updateDriver(DriverDto driverDto) {
+    public void updateDriver(Driver driver) {
         try {
             restTemplate.put(DRIVER_URL, Void.class);
         } catch (RestClientException e) {

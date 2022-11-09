@@ -1,4 +1,4 @@
-package com.carrentalfrontend.dto;
+package com.carrentalfrontend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarReturnReportDto {
+public class CarReturnReport {
 
     private Long carReturnReportId;
     private boolean cleanCarBody;
@@ -20,3 +20,4 @@ public class CarReturnReportDto {
     private String remarks;
     private BigDecimal depositRefund;
 }
+

@@ -1,4 +1,4 @@
-package com.carrentalfrontend.dto;
+package com.carrentalfrontend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,10 +8,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarRentDto {
+public class CarRent {
 
     private Long carRentId;
     private LocalDate rentalDate;
@@ -30,12 +31,14 @@ public class CarRentDto {
     private boolean abolitionDeductibleInDamage;
     private BigDecimal abolitionFee;
 
-
-    private CarDto carDto;
-    private DriverDto driverDto;
-    private ClientDto clientDto;
-    private CarReleaseReportDto carReleaseReportDto;
-    private CarReturnReportDto carReturnReportDto;
+    private Car car;
+    private Driver driver;
+    private Client client;
+    private CarReleaseReport carReleaseReport;
+    private CarReturnReport carReturnReport;
 
 
 }
+
+
+

@@ -2,7 +2,7 @@ package com.carrentalfrontend.service;
 
 
 import com.carrentalfrontend.client.CarClient;
-import com.carrentalfrontend.dto.CarDto;
+import com.carrentalfrontend.domain.Car;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,20 +22,20 @@ public class CarService {
         return carService;
     }
 
-    public List<CarDto> getAllCars() {
+    public List<Car> getAllCars() {
         return carClient.getAllCars();
     }
 
-    public CarDto getCar(Long carId) {
+    public Car getCar(Long carId) {
         return carClient.getCar(carId);
     }
 
-    public void saveNewCar(CarDto carDto) {
-        carClient.saveNewCar(carDto);
+    public void saveNewCar(Car car) {
+        carClient.saveNewCar(car);
     }
 
-    public void updateCar(CarDto carDto) {
-        carClient.updateCar(carDto);
+    public void updateCar(Car car) {
+        carClient.updateCar(car);
     }
 
     public void deleteCar(Long carId) {

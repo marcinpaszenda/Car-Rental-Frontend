@@ -1,4 +1,4 @@
-package com.carrentalfrontend.dto;
+package com.carrentalfrontend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDto {
+public class Client {
 
     private Long clientId;
     private String name;
@@ -19,10 +19,11 @@ public class ClientDto {
     private String city;
     private String country;
     private String placeOfBirth;
-//    private TypeOfIdentificationNumber typeOfIdentificationNumber;
+    private TypeOfIdentificationNumber typeOfIdentificationNumber;
     private Long identificationNumber;
     private Long phoneNumber;
     private String email;
-    private List<DriverDto> drivers;
-    private List<CarRentDto> carRents;
+    private List<Driver> drivers;
+    private List<CarRent> carRents;
 }
+

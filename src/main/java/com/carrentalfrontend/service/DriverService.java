@@ -1,7 +1,7 @@
 package com.carrentalfrontend.service;
 
 import com.carrentalfrontend.client.DriverClient;
-import com.carrentalfrontend.dto.DriverDto;
+import com.carrentalfrontend.domain.Driver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +21,16 @@ public class DriverService {
         return driverService;
     }
 
-    public List<DriverDto> getAllDrivers() {
+    public List<Driver> getAllDrivers() {
         return driverClient.getAllDrivers();
     }
 
-    public void saveNewDriver(DriverDto driverDto) {
-        driverClient.saveNewDriver(driverDto);
+    public void saveNewDriver(Driver driver) {
+        driverClient.saveNewDriver(driver);
     }
 
-    public void updateDriver(DriverDto driverDto) {
-        driverClient.updateDriver(driverDto);
+    public void updateDriver(Driver driver) {
+        driverClient.updateDriver(driver);
     }
 
     public void deleteDriver(Long driverId) {

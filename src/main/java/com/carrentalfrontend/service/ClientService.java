@@ -1,7 +1,7 @@
 package com.carrentalfrontend.service;
 
 import com.carrentalfrontend.client.ClientClient;
-import com.carrentalfrontend.dto.ClientDto;
+import com.carrentalfrontend.domain.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +21,16 @@ public class ClientService {
         return clientService;
     }
 
-    public List<ClientDto> getAllClients() {
+    public List<Client> getAllClients() {
         return clientClient.getAllClients();
     }
 
-    public void saveNewClient(ClientDto clientDto) {
-        clientClient.saveNewClient(clientDto);
+    public void saveNewClient(Client client) {
+        clientClient.saveNewClient(client);
     }
 
-    public void updateClient(ClientDto clientDto) {
-        clientClient.updateClient(clientDto);
+    public void updateClient(Client client) {
+        clientClient.updateClient(client);
     }
 
     public void deleteClient(Long clientId) {

@@ -1,7 +1,7 @@
 package com.carrentalfrontend.client;
 
 
-import com.carrentalfrontend.dto.CarDto;
+import com.carrentalfrontend.domain.Car;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +30,9 @@ public class CarClient {
         return carClient;
     }
 
-    public List<CarDto> getAllCars() {
+    public List<Car> getAllCars() {
         try {
-            ResponseEntity<CarDto[]> responseEntity = restTemplate.getForEntity(CAR_URL, CarDto[].class);
+            ResponseEntity<Car[]> responseEntity = restTemplate.getForEntity(CAR_URL, Car[].class);
             return Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
@@ -40,26 +40,26 @@ public class CarClient {
         }
     }
 
-    public CarDto getCar(Long carId) {
+    public Car getCar(Long carId) {
         try {
-            return restTemplate.getForObject(CAR_URL + carId, CarDto.class);
+            return restTemplate.getForObject(CAR_URL + carId, Car.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
             return null;
         }
     }
 
-    public void saveNewCar(CarDto carDto) {
+    public void saveNewCar(Car car) {
         try {
-            restTemplate.postForObject(CAR_URL, carDto, Void.class);
+            restTemplate.postForObject(CAR_URL, car, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
     }
 
-    public void updateCar(CarDto carDto) {
+    public void updateCar(Car car) {
         try {
-            restTemplate.put(CAR_URL, carDto, Void.class);
+            restTemplate.put(CAR_URL, car, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }

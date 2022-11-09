@@ -1,4 +1,4 @@
-package com.carrentalfrontend.dto;
+package com.carrentalfrontend.domain;
 
 public enum Currency {
 

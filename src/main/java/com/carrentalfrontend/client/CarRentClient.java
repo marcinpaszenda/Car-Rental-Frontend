@@ -1,6 +1,6 @@
 package com.carrentalfrontend.client;
 
-import com.carrentalfrontend.dto.CarRentDto;
+import com.carrentalfrontend.domain.CarRent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +26,11 @@ public class CarRentClient {
         return carRentClient;
     }
 
-    public List<CarRentDto> getAllCarRents() {
+
+    public List<CarRent> getAllCarRents() {
 
         try {
-            ResponseEntity<CarRentDto[]> responseEntity = restTemplate.getForEntity(CAR_RENT_URL, CarRentDto[].class);
+            ResponseEntity<CarRent[]> responseEntity = restTemplate.getForEntity(CAR_RENT_URL, CarRent[].class);
             return Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
@@ -37,17 +38,26 @@ public class CarRentClient {
         }
     }
 
-    public void saveNewCarRent(CarRentDto carRentDto) {
+    public CarRent getCarRent(Long carRentId) {
         try {
-            restTemplate.postForObject(CAR_RENT_URL, carRentDto, Void.class);
+            return restTemplate.getForObject(CAR_RENT_URL + carRentId, CarRent.class);
+        } catch (RestClientException e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
+    }
+
+    public void saveNewCarRent(CarRent carRent) {
+        try {
+            restTemplate.postForObject(CAR_RENT_URL, carRent, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
     }
 
-    public void updateCarRent(CarRentDto carRentDto) {
+    public void updateCarRent(CarRent carRent) {
         try {
-            restTemplate.put(CAR_RENT_URL,carRentDto, Void.class);
+            restTemplate.put(CAR_RENT_URL, carRent, Void.class);
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
@@ -60,4 +70,5 @@ public class CarRentClient {
             log.error(e.getMessage(), e);
         }
     }
+
 }
