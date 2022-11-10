@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @PageTitle("Car rents list | Vaadin CRM")
-@RequestMapping("v1/carRentalView")
 @Route(value = "", layout = MainLayout.class)
 public class CarRentalView extends VerticalLayout {
 
