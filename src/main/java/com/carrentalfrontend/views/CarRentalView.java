@@ -17,9 +17,11 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @PageTitle("Car rents list | Vaadin CRM")
+@RequestMapping("v1/carRentalView")
 @Route(value = "", layout = MainLayout.class)
 public class CarRentalView extends VerticalLayout {
 
