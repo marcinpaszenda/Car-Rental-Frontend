@@ -1,14 +1,12 @@
 package com.carrentalfrontend.forms;
 
-import com.carrentalfrontend.CarRentalView;
+import com.carrentalfrontend.views.CarRentalView;
 import com.carrentalfrontend.domain.Car;
 import com.carrentalfrontend.domain.CarRent;
 import com.carrentalfrontend.domain.Currency;
 import com.carrentalfrontend.service.CarRentService;
 import com.carrentalfrontend.service.CarService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
-import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -20,11 +18,8 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.shared.Registration;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class CarRentalForm extends FormLayout {
 
@@ -50,7 +45,6 @@ public class CarRentalForm extends FormLayout {
     private TextField abolitionFee = new TextField("abolition Fee");
     private ComboBox<Car> car = new ComboBox<>("Car");
     private ComboBox<Car> registrationNumber = new ComboBox<>("Registration number");
-
 
     Button save = new Button("SAVE");
     Button delete = new Button("DELETE");
@@ -116,6 +110,7 @@ public class CarRentalForm extends FormLayout {
         CarRent carRent = binder.getBean();
         carRentService.saveNewCarRent(carRent);
         carRentalView.updateList();
+        carRentalView.closeForm();
     }
 
     public void delete() {

@@ -1,4 +1,4 @@
-package com.carrentalfrontend;
+package com.carrentalfrontend.views;
 
 import com.carrentalfrontend.domain.Car;
 import com.carrentalfrontend.domain.CarRent;
@@ -7,6 +7,8 @@ import com.carrentalfrontend.forms.CarRentalForm;
 import com.carrentalfrontend.service.CarRentService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -14,9 +16,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.LumoUtility;
+
 
 @PageTitle("Car rents list | Vaadin CRM")
-@Route(value = "")
+@Route(value = "", layout = MainLayout.class)
 public class CarRentalView extends VerticalLayout {
 
     private Grid<CarRent> grid = new Grid<>(CarRent.class);
@@ -40,8 +44,6 @@ public class CarRentalView extends VerticalLayout {
         updateList();
         closeForm();
 
-        grid.asSingleSelect().addValueChangeListener(event -> carRentalForm.setCarRent(grid.asSingleSelect().getValue()));
-
     }
 
     public void closeForm() {
@@ -59,7 +61,7 @@ public class CarRentalView extends VerticalLayout {
 
     private void configureForm() {
         carRentalForm = new CarRentalForm(this);
-        carRentalForm.setWidth("100em");
+        carRentalForm.setWidth("100%");
     }
 
     private Component getToolbar() {
@@ -69,15 +71,16 @@ public class CarRentalView extends VerticalLayout {
         filterText.addValueChangeListener(e -> update());
 
         Button addNewCarRental = new Button("Nowy wynajem");
-        addNewCarRental.addClickListener(event -> {
-            grid.asSingleSelect().clear();
-            carRentalForm.setCarRent(new CarRent());
-
-        });
+        addNewCarRental.addClickListener(event -> addContactButton());
 
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addNewCarRental);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    private void addContactButton() {
+        grid.asSingleSelect().clear();
+        carRentalForm.setCarRent(new CarRent());
     }
 
     private void configureGrid() {
@@ -103,6 +106,9 @@ public class CarRentalView extends VerticalLayout {
         }).setHeader("Driver");
 
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+
+        //wybieramy pojedynczy rekord do formularza
+        grid.asSingleSelect().addValueChangeListener(event -> carRentalForm.setCarRent(grid.asSingleSelect().getValue()));
 
     }
 

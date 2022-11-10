@@ -14,7 +14,7 @@ repositories {
 }
 
 jar {
-    enabled = false
+    enabled = true
 }
 
 ext {
@@ -22,16 +22,13 @@ ext {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.vaadin:vaadin-spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql:42.5.0'
+//    runtimeOnly 'org.postgresql:postgresql:42.5.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-//    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 }
 

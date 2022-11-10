@@ -1,0 +1,12 @@
+@import url('./views/car-rental-view.css');
+@import url('lumo-css-framework/all-classes.css');
+
+a[highlight] {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+* {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 1rem;
+}
