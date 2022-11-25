@@ -7,7 +7,7 @@ The project consists of two applications
 - A Java frontend application that uses the Vaadin framework,
 - Both applications communicate with each other using RestTemplate.
 
-[![lemarCar](https://scontent-waw1-1.xx.fbcdn.net/v/t39.30808-6/304075079_501262355335563_5869184889274694793_n.png?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UnsIXi9KXCMAX8wrXYc&_nc_ht=scontent-waw1-1.xx&oh=00_AfDzfznf_08yBKoLGQ6WMRNmrbX-mfYe49qs5MdNbZMapA&oe=63695481)](http://www.lemarcar.pl/)
+[![lemarCar](http://www.lemarcar.pl/grafika/logo.png)](http://www.lemarcar.pl/)
 ---
 
 ### Tech 
@@ -58,7 +58,7 @@ Projekt składa się z dwóch aplikacji:
 - Aplikacja frontendowa napisania w Javie, z wykorzystaniem frameworka Vaadin,
 - Obie aplikacje komunikują się ze sobą za pomocą RestTemplate.
 
-[![lemarCar](https://scontent-waw1-1.xx.fbcdn.net/v/t39.30808-6/304075079_501262355335563_5869184889274694793_n.png?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UnsIXi9KXCMAX8wrXYc&_nc_ht=scontent-waw1-1.xx&oh=00_AfDzfznf_08yBKoLGQ6WMRNmrbX-mfYe49qs5MdNbZMapA&oe=63695481)](http://www.lemarcar.pl/)
+[![lemarCar](http://www.lemarcar.pl/grafika/logo.png)](http://www.lemarcar.pl/)
 ---
 
 ### Technologie 

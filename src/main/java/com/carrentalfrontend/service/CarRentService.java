@@ -5,6 +5,8 @@ import com.carrentalfrontend.domain.CarRent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +26,12 @@ public class CarRentService {
 
     public List<CarRent> getAllCarRents() {
         return carRentClient.getAllCarRents();
+//                .stream()
+//                .filter(carRent -> carRent.getReturnDate() == null || carRent.getReturnDate().isAfter(LocalDate.now().minusDays(1)))
+//                .collect(Collectors.toList());
     }
+
+
 
     public CarRent getCarRent(Long carRentId) {
         return carRentClient.getCarRent(carRentId);
@@ -44,7 +51,8 @@ public class CarRentService {
 
     public List<CarRent> findByRegistrationNumber(String registrationNumber) {
         return (carRentClient.getAllCarRents().stream()
-                .filter(carRent -> carRent.getCar().getRegistrationNumber().contains(registrationNumber))
+                .filter(carRent -> carRent.getCar().getRegistrationNumber().toLowerCase().contains(registrationNumber) ||
+                        carRent.getCar().getRegistrationNumber().toUpperCase().contains(registrationNumber))
                 .collect(Collectors.toList()));
     }
 }

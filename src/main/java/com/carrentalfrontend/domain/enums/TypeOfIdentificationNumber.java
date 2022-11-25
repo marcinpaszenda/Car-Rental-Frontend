@@ -1,4 +1,4 @@
-package com.carrentalfrontend.domain;
+package com.carrentalfrontend.domain.enums;
 
 public enum TypeOfIdentificationNumber {
 

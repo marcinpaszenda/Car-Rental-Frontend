@@ -7,6 +7,20 @@ a[highlight] {
 }
 
 * {
-    font-family: "Lucida Console", "Courier New", monospace;
+    font-family: "Rockwell", "Rockwell", monospace;
     font-size: 1rem;
+}
+
+[theme~="dark"] {
+    --lumo-base-color: hsla(195, 100%, 12%, 1);
+    --lumo-primary-color: hsl(122, 96%, 47%);
+    --lumo-primary-color-50pct: hsl(122, 96%, 47%, 0.5);
+    --lumo-primary-color-10pct: hsl(122, 96%, 47%, 0.1);
+}
+
+@media all and (max-width: 1100px) {
+    .car-rents-view.editing .toolbar,
+    .car-rents-view.editing .car-rents-grid {
+        display: none;
+    }
 }

@@ -19,7 +19,9 @@ import java.util.Objects;
 public class DriverClient {
 
     private final RestTemplate restTemplate;
-    private static final String DRIVER_URL = "https://car-rental-lemarcar.herokuapp.com/v1/drivers/";
+//    private static final String DRIVER_URL = "https://car-rental-lemarcar.herokuapp.com/v1/drivers/";
+    private static final String DRIVER_URL = "http://localhost:8888/v1/drivers/";
+
     private static DriverClient driverClient;
 
     public static DriverClient getInstance() {

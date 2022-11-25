@@ -21,7 +21,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void createHeader() {
-        H4 logo = new H4("CAR RENTAL CRM");
+        H4 logo = new H4("System wypożyczeń");
         logo.addClassNames("text-l", "m-m");
 
 //        logo.addClassNames(LumoUtility.FontSize.XXSMALL, LumoUtility.Background.PRIMARY_10);
@@ -41,7 +41,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink carRentalView = new RouterLink("Car rentals", CarRentalView.class);
+        RouterLink carRentalView = new RouterLink("Aktualne \nwypożyczenia", CarRentalView.class);
         carRentalView.setHighlightCondition(HighlightConditions.sameLocation());
 
         carRentalView.addClassNames(LumoUtility.Background.CONTRAST_5);

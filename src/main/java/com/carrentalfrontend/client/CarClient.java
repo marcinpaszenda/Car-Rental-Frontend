@@ -20,7 +20,8 @@ import java.util.Objects;
 public class CarClient {
 
     private final RestTemplate restTemplate;
-    private static final String CAR_URL = "https://car-rental-lemarcar.herokuapp.com/v1/cars/";
+//    private static final String CAR_URL = "https://car-rental-lemarcar.herokuapp.com/v1/cars/";
+    private static final String CAR_URL ="http://localhost:8888/v1/cars/";
     private static CarClient carClient;
 
     public static CarClient getInstance() {

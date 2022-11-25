@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @NpmPackage(value = "lumo-css-framework", version = "^4.0.10")
-@Theme("myapp")
+@Theme(value = "myapp", variant = "dark")
 public class CarRentalFrontendApplication implements AppShellConfigurator {
 
     public static void main(String[] args) {
