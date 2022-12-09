@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 @RequiredArgsConstructor
 public class CarRentService {
@@ -26,11 +27,14 @@ public class CarRentService {
 
     public List<CarRent> getAllCarRents() {
         return carRentClient.getAllCarRents();
-//                .stream()
-//                .filter(carRent -> carRent.getReturnDate() == null || carRent.getReturnDate().isAfter(LocalDate.now().minusDays(1)))
-//                .collect(Collectors.toList());
     }
 
+    public List<CarRent> getAllActiveCarRents() {
+        return carRentClient.getAllCarRents()
+                .stream()
+                .filter(carRent -> carRent.getReturnDate() == null || carRent.getReturnDate().isAfter(LocalDate.now().minusDays(1)))
+                .collect(Collectors.toList());
+    }
 
 
     public CarRent getCarRent(Long carRentId) {
@@ -53,6 +57,20 @@ public class CarRentService {
         return (carRentClient.getAllCarRents().stream()
                 .filter(carRent -> carRent.getCar().getRegistrationNumber().toLowerCase().contains(registrationNumber) ||
                         carRent.getCar().getRegistrationNumber().toUpperCase().contains(registrationNumber))
+                .collect(Collectors.toList()));
+    }
+
+    public List<CarRent> findByCarModel(String car) {
+        return (carRentClient.getAllCarRents().stream()
+                .filter(carRent -> carRent.getCar().getCar().toUpperCase().contains(car) ||
+                        carRent.getCar().getCar().toLowerCase().contains(car))
+                .collect(Collectors.toList()));
+    }
+
+    public List<CarRent> findByClient(String client) {
+        return (carRentClient.getAllCarRents().stream()
+                .filter(carRent -> carRent.getClient().getName().toUpperCase().contains(client) ||
+                        carRent.getClient().getName().toLowerCase().contains(client))
                 .collect(Collectors.toList()));
     }
 }

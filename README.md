@@ -24,7 +24,6 @@ The project uses the following technologies and tools to work properly:
 
 ### How to run
 
-- Backend: sample query [link]
 - Backend: [repository_link]
 
 ### Project status
@@ -75,7 +74,6 @@ Projekt wykorzystuje następujące technologie i narzędzia:
 
 ### Uruchomienie
 
-- Backend: przykładowe zapytanie [link]
 - Backend: kod repozytorium [repository_link]
 
 ### Status projektu

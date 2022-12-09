@@ -9,8 +9,11 @@ import com.carrentalfrontend.forms.ClientForm;
 import com.carrentalfrontend.forms.DriverForm;
 import com.carrentalfrontend.service.CarRentService;
 import com.carrentalfrontend.service.ClientService;
+import com.carrentalfrontend.service.DriverService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,9 +23,11 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+@JsModule("@vaadin/vaadin-lumo-styles/utility.js")
+@CssImport(value="themes/myapp/styles.css", include="lumo-utility")
 @PageTitle("Car rents list | Vaadin CRM")
 @Route(value = "", layout = MainLayout.class)
-public class CarRentalView extends VerticalLayout {
+public class MainView extends VerticalLayout {
 
 
     private Grid<CarRent> grid = new Grid<>(CarRent.class);
@@ -31,13 +36,15 @@ public class CarRentalView extends VerticalLayout {
 
     private CarRentService carRentService = CarRentService.getInstance();
     private ClientService clientService = ClientService.getInstance();
+    private DriverService driverService = DriverService.getInstance();
+
 
     private ClientForm clientForm = new ClientForm(this);
     private DriverForm driverForm = new DriverForm(this);
     private CarRentalForm carRentalForm = new CarRentalForm(this);
 
-    public CarRentalView() {
-        addClassName("car-rents-view");
+    public MainView() {
+        addClassName("main-view");
 
         configureGrid();
         configureForm();
@@ -79,14 +86,13 @@ public class CarRentalView extends VerticalLayout {
         carRentalForm.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0", 1),
                 new FormLayout.ResponsiveStep("300px", 2),
-                new FormLayout.ResponsiveStep("500px", 3)
-
+                new FormLayout.ResponsiveStep("600px", 3)
         );
+
         clientForm.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0", 1),
-                new FormLayout.ResponsiveStep("300px", 2),
-                new FormLayout.ResponsiveStep("500px", 3)
-
+                new FormLayout.ResponsiveStep("800px", 2),
+                new FormLayout.ResponsiveStep("800px", 3)
         );
 
         driverForm.setResponsiveSteps(
@@ -117,22 +123,31 @@ public class CarRentalView extends VerticalLayout {
     }
 
     private void addClientButton() {
+        closeClientForm();
+        closeDriverForm();
+        closeForm();
         grid.asSingleSelect().clear();
         clientForm.setClient(new Client());
     }
 
     private void addDriverButton() {
+        closeClientForm();
+        closeDriverForm();
+        closeForm();
         grid.asSingleSelect().clear();
         driverForm.setDriver(new Driver());
     }
 
     private void addContactButton() {
+        closeClientForm();
+        closeDriverForm();
+        closeForm();
         grid.asSingleSelect().clear();
         carRentalForm.setCarRent(new CarRent());
     }
 
     private void configureGrid() {
-        grid.addClassName("car-rents-grid");
+        grid.addClassName("main-view-grid");
         grid.setSizeFull();
 
         grid.setColumns("rentalDate", "returnDate");
@@ -143,11 +158,6 @@ public class CarRentalView extends VerticalLayout {
             Car car = carRent.getCar();
             return car == null ? "-" : car.getCarBrand();
         }).setHeader("Samochód");
-
-//        grid.addColumn(carRent -> {
-//            Car car = carRent.getCar();
-//            return car == null ? "-" : car.getRegistrationNumber();
-//        }).setHeader("Nr rej.");
 
         grid.addColumn(carRent -> {
             Client client = carRent.getClient();
@@ -163,11 +173,10 @@ public class CarRentalView extends VerticalLayout {
 
         //wybieramy pojedynczy rekord do formularza
         grid.asSingleSelect().addValueChangeListener(event -> carRentalForm.setCarRent(grid.asSingleSelect().getValue()));
-
     }
 
     public void updateList() {
-        grid.setItems(carRentService.getAllCarRents());
+        grid.setItems(carRentService.getAllActiveCarRents());
     }
 
     private void update() {

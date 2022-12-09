@@ -3,9 +3,10 @@ package com.carrentalfrontend.forms;
 import com.carrentalfrontend.domain.Client;
 import com.carrentalfrontend.domain.enums.TypeOfIdentificationNumber;
 import com.carrentalfrontend.service.ClientService;
-import com.carrentalfrontend.views.CarRentalView;
+import com.carrentalfrontend.views.MainView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -16,8 +17,7 @@ import com.vaadin.flow.data.binder.Binder;
 
 public class ClientForm extends FormLayout {
 
-    private CarRentalView carRentalView;
-//    private ClientForm clientForm;
+    private MainView mainView;
     private ClientService clientService = ClientService.getInstance();
 
     //klient
@@ -41,8 +41,8 @@ public class ClientForm extends FormLayout {
 
     private Binder<Client> binderClient = new Binder<>(Client.class);
 
-    public ClientForm(CarRentalView carRentalView) {
-        this.carRentalView = carRentalView;
+    public ClientForm(MainView mainView) {
+        this.mainView = mainView;
         binderClient.bindInstanceFields(this);
 
         typeOfIdentificationNumber.setItems(TypeOfIdentificationNumber.values());
@@ -83,20 +83,21 @@ public class ClientForm extends FormLayout {
     private void saveClient() {
         Client client = binderClient.getBean();
         clientService.saveNewClient(client);
-        carRentalView.updateList();
-        carRentalView.closeClientForm();
+        UI.getCurrent().getPage().reload();
+        mainView.updateList();
+        mainView.closeClientForm();
     }
 
     private void deleteClient() {
         Client client = binderClient.getBean();
         clientService.deleteClient(client.getClientId());
-        carRentalView.updateList();
-        carRentalView.closeClientForm();
+        mainView.updateList();
+        mainView.closeClientForm();
 
     }
 
     private void cancelClientForm() {
-        carRentalView.closeClientForm();
+        mainView.closeClientForm();
     }
 
     public void setClient(Client client) {

@@ -8,3 +8,7 @@ declare module '*.css' {
   const content: CSSResultGroup;
   export default content;
 }
+
+declare module "*.jpg"
+declare module "*.png"
+declare module "*.gif"

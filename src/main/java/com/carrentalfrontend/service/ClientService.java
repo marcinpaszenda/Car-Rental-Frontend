@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +36,12 @@ public class ClientService {
 
     public void deleteClient(Long clientId) {
         clientClient.deleteCar(clientId);
+    }
+
+    public List<Client> findByName(String name) {
+        return (clientClient.getAllClients().stream()
+                .filter(client -> client.getName().toLowerCase().contains(name) ||
+                        client.getName().toUpperCase().contains(name))
+                .collect(Collectors.toList()));
     }
 }

@@ -1,26 +1,121 @@
 @import url('./views/car-rental-view.css');
 @import url('lumo-css-framework/all-classes.css');
 
-a[highlight] {
-    font-weight: bold;
-    text-decoration: underline;
-}
+
+/*a[highlight] {*/
+/*    font-weight: bold;*/
+/*    text-decoration: underline;*/
+/*}*/
 
 * {
-    font-family: "Rockwell", "Rockwell", monospace;
+    font-family: "Verdana", "Verdana", monospace;
     font-size: 1rem;
 }
 
+/*[theme~="dark"] {*/
+/*    --lumo-base-color: hsla(195, 100%, 12%, 1);*/
+/*    --lumo-primary-color: hsl(122, 96%, 47%);*/
+/*    --lumo-primary-color-50pct: hsl(122, 96%, 47%, 0.5);*/
+/*    --lumo-primary-color-10pct: hsl(122, 96%, 47%, 0.1);*/
+/*}*/
+
 [theme~="dark"] {
-    --lumo-base-color: hsla(195, 100%, 12%, 1);
-    --lumo-primary-color: hsl(122, 96%, 47%);
-    --lumo-primary-color-50pct: hsl(122, 96%, 47%, 0.5);
-    --lumo-primary-color-10pct: hsl(122, 96%, 47%, 0.1);
+    --lumo-base-color: hsl(214, 87%, 11%);
+    --lumo-shade-5pct: rgba(96, 141, 199, 0.05);
+    --lumo-shade-10pct: rgba(96, 141, 199, 0.1);
+    --lumo-shade-20pct: rgba(96, 141, 199, 0.2);
+    --lumo-shade-30pct: rgba(96, 141, 199, 0.3);
+    --lumo-shade-40pct: rgba(96, 141, 199, 0.4);
+    --lumo-shade-50pct: rgba(96, 141, 199, 0.5);
+    --lumo-shade-60pct: rgba(96, 141, 199, 0.6);
+    --lumo-shade-70pct: rgba(96, 141, 199, 0.7);
+    --lumo-shade-80pct: rgba(96, 141, 199, 0.8);
+    --lumo-shade: hsl(214, 48%, 58%);
+    --lumo-tint-5pct: rgba(167, 195, 230, 0.05);
+    --lumo-tint-10pct: rgba(167, 195, 230, 0.1);
+    --lumo-tint-20pct: rgba(167, 195, 230, 0.2);
+    --lumo-tint-30pct: rgba(167, 195, 230, 0.3);
+    --lumo-tint-40pct: rgba(167, 195, 230, 0.4);
+    --lumo-tint-50pct: rgba(167, 195, 230, 0.5);
+    --lumo-tint-60pct: rgba(167, 195, 230, 0.6);
+    --lumo-tint-70pct: rgba(167, 195, 230, 0.7);
+    --lumo-tint-80pct: rgba(167, 195, 230, 0.8);
+    --lumo-tint-90pct: rgba(167, 195, 230, 0.9);
+    --lumo-tint: hsl(214, 56%, 78%);
+    --lumo-primary-contrast-color: #ffffff;
+    --lumo-error-text-color: rgb(255, 13, 0);
+    --lumo-error-color-50pct: rgba(255, 13, 0, 0.5);
+    --lumo-error-color-10pct: rgba(255, 13, 0, 0.1);
+    --lumo-error-color: hsl(3, 100%, 50%);
+    --lumo-error-contrast-color: #ffffff;
+    --lumo-success-text-color: rgb(41, 251, 9);
+    --lumo-success-color-50pct: rgba(51, 190, 30, 0.5);
+    --lumo-success-color-10pct: rgba(51, 190, 30, 0.1);
+    --lumo-success-color: hsl(112, 73%, 43%);
+    --lumo-success-contrast-color: #ffffff;
+    --lumo-header-text-color: hsl(214, 100%, 100%);
+    --lumo-body-text-color: hsl(214, 14%, 100%);
+    --lumo-secondary-text-color: hsl(214, 100%, 100%);
+    --lumo-tertiary-text-color: rgba(218, 226, 236, 0.72);
+    --lumo-disabled-text-color: rgba(167, 195, 230, 0.46);
+    --lumo-shade-90pct: hsla(214, 37%, 55%, 0.9);
 }
 
-@media all and (max-width: 1100px) {
-    .car-rents-view.editing .toolbar,
-    .car-rents-view.editing .car-rents-grid {
-        display: none;
-    }
+
+/*@media all and (max-width: 1100px) {*/
+/*    .car-rents-view.editing .toolbar,*/
+/*    .car-rents-view.editing .car-rents-grid {*/
+/*        display: none;*/
+/*    }*/
+/*}*/
+
+vaadin-app-layout::part(drawer) {
+    width: 60px;
+    /*margin-top: 0px;*/
 }
+
+/*.application-logo {*/
+/*    logo: url('frontend/themes/myapp/images/logo.png');*/
+/*}*/
+
+.header {
+    background-color: white;
+}
+.drawer {
+    background-color: black;
+}
+.main-icon {
+    /*margin-top: 70px;*/
+}
+.mainViewIcon {
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.carIcon {
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.carRentalsViewIcon {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.clientViewIcon {
+    margin: 0;
+    position: absolute;
+    top: 80%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+

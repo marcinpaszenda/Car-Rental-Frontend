@@ -4,9 +4,10 @@ import com.carrentalfrontend.domain.Client;
 import com.carrentalfrontend.domain.Driver;
 import com.carrentalfrontend.service.ClientService;
 import com.carrentalfrontend.service.DriverService;
-import com.carrentalfrontend.views.CarRentalView;
+import com.carrentalfrontend.views.MainView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -18,7 +19,7 @@ import com.vaadin.flow.data.binder.Binder;
 
 public class DriverForm extends FormLayout {
 
-    private CarRentalView carRentalView;
+    private MainView mainView;
     private DriverService driverService = DriverService.getInstance();
     private ClientService clientService = ClientService.getInstance();
 
@@ -34,8 +35,8 @@ public class DriverForm extends FormLayout {
 
     private Binder<Driver> binderDriver = new Binder<>(Driver.class);
 
-    public DriverForm(CarRentalView carRentalView) {
-        this.carRentalView = carRentalView;
+    public DriverForm(MainView mainView) {
+        this.mainView = mainView;
         binderDriver.bindInstanceFields(this);
 
         client.setItems(clientService.getAllClients());
@@ -74,19 +75,20 @@ public class DriverForm extends FormLayout {
         private void saveDriver() {
             Driver driver = binderDriver.getBean();
             driverService.saveNewDriver(driver);
-            carRentalView.updateList();
-            carRentalView.closeDriverForm();
+            UI.getCurrent().getPage().reload();
+            mainView.updateList();
+            mainView.closeDriverForm();
         }
 
         private void deleteDriver() {
             Driver driver = binderDriver.getBean();
             driverService.deleteDriver(driver.getDriverId());
-            carRentalView.updateList();
-            carRentalView.closeDriverForm();
+            mainView.updateList();
+            mainView.closeDriverForm();
         }
 
         private void cancelDriver() {
-            carRentalView.closeDriverForm();
+            mainView.closeDriverForm();
         }
 
         public void setDriver (Driver driver){

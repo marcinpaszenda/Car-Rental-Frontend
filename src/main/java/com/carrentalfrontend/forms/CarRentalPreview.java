@@ -1,9 +1,15 @@
 package com.carrentalfrontend.forms;
 
-import com.carrentalfrontend.domain.*;
+import com.carrentalfrontend.domain.Car;
+import com.carrentalfrontend.domain.CarRent;
+import com.carrentalfrontend.domain.Client;
+import com.carrentalfrontend.domain.Driver;
 import com.carrentalfrontend.domain.enums.*;
-import com.carrentalfrontend.service.*;
-import com.carrentalfrontend.views.MainView;
+import com.carrentalfrontend.service.CarRentService;
+import com.carrentalfrontend.service.CarService;
+import com.carrentalfrontend.service.ClientService;
+import com.carrentalfrontend.service.DriverService;
+import com.carrentalfrontend.views.CarRentalsView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
@@ -19,15 +25,13 @@ import com.vaadin.flow.data.binder.Binder;
 
 import java.time.Duration;
 
-public class CarRentalForm extends FormLayout {
+public class CarRentalPreview extends FormLayout {
 
-    private MainView mainView;
+    private CarRentalsView carRentalsView;
     private CarRentService carRentService = CarRentService.getInstance();
     private CarService carService = CarService.getInstance();
     private ClientService clientService = ClientService.getInstance();
     private DriverService driverService = DriverService.getInstance();
-
-//    private CarRentalTabsContent carRentalTabsContent = new CarRentalTabsContent(this);
 
     private DatePicker rentalDate = new DatePicker("Data wynajmu");
     private TimePicker rentalHour = new TimePicker("Godzina wynajmu");
@@ -65,14 +69,12 @@ public class CarRentalForm extends FormLayout {
     private TextField remarksReturn = new TextField("Uwagi: ZWROT");
     private TextField depositRefund = new TextField("Zwrot depozytu");
 
-    Button save = new Button("SAVE");
-    Button delete = new Button("DELETE");
-    Button cancel = new Button("CANCEL");
+    Button cancel = new Button("ZAMKNIJ");
 
     private Binder<CarRent> binder = new Binder<>(CarRent.class);
 
-    public CarRentalForm(MainView mainView) throws NullPointerException {
-        this.mainView = mainView;
+    public CarRentalPreview(CarRentalsView carRentalsView) throws NullPointerException {
+        this.carRentalsView = carRentalsView;
 
         binder.bindInstanceFields(this);
 
@@ -99,77 +101,27 @@ public class CarRentalForm extends FormLayout {
         VerticalLayout buttonLayout = new VerticalLayout();
         buttonLayout.add(createButtonLayout());
 
-
-//        add(
-//                getContent()
-//        );
-
         add(
-                car,
-                client,
-                driver,
-                rentalDate,
-                rentalHour,
-                returnDate,
-                returnHour,
-                rentalDayLength,
-                currency,
-                dailyRate,
-                additionalCosts,
-                deposit,
-                totalCost,
-                dailyMileageLimit,
-                travelAbroad,
-                registrationCertificate,
-                abolitionDeductibleInDamage,
-                abolitionFee,
-                cleanCarBodyRelease,
-                cleanCarInteriorRelease,
-                amountOfFuelRelease,
-                carMileageRelease,
-                remarksRelease,
-                cleanCarBodyReturn,
-                cleanCarInteriorReturn,
-                amountOfFuelReturn,
-                carMileageReturn,
-                newCarDamage,
-                remarksReturn,
-                depositRefund,
+                car, client, driver, rentalDate, rentalHour, returnDate, returnHour,
+                rentalDayLength, currency, dailyRate, additionalCosts, deposit, totalCost,
+                dailyMileageLimit, travelAbroad, registrationCertificate,
+                abolitionDeductibleInDamage, abolitionFee, cleanCarBodyRelease,
+                cleanCarInteriorRelease, amountOfFuelRelease, carMileageRelease, remarksRelease,
+                cleanCarBodyReturn, cleanCarInteriorReturn, amountOfFuelReturn, carMileageReturn,
+                newCarDamage, remarksReturn, depositRefund,
                 buttonLayout
         );
     }
 
     private Component createButtonLayout() {
-        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-
-        save.addClickListener(event -> save());
-        delete.addClickListener(event -> delete());
         cancel.addClickListener(event -> cancel());
-
-        save.addClickShortcut(Key.ENTER);
         cancel.addClickShortcut(Key.ESCAPE);
-
-        return new HorizontalLayout(save, delete, cancel);
-    }
-
-    private void save() {
-        CarRent carRent = binder.getBean();
-        carRentService.saveNewCarRent(carRent);
-
-        mainView.updateList();
-        mainView.closeForm();
-    }
-
-    private void delete() {
-        CarRent carRent = binder.getBean();
-        carRentService.deleteCarRent(carRent.getCarRentId());
-        mainView.updateList();
+        return new HorizontalLayout(cancel);
     }
 
     private void cancel() {
-        mainView.closeForm();
+        carRentalsView.closeForm();
     }
 
     public void setCarRent(CarRent carRent) {
@@ -182,10 +134,4 @@ public class CarRentalForm extends FormLayout {
         }
     }
 
-//    private Component getContent() {
-//        HorizontalLayout content = new HorizontalLayout(carRentalTabsContent);
-//        content.addClassName("carRentalTabsContent");
-//        content.setSizeFull();
-//        return content;
-//    }
 }

@@ -1,5 +1,6 @@
 package com.carrentalfrontend.domain;
 
+import com.carrentalfrontend.domain.enums.CarStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 public class Car {
 
     private Long carId;
+    private String car;
     private String carBrand;
     private String registrationNumber;
     private Long carMileage;
-    private String vinNumber;
+    private CarStatus carStatus;
     private String carDamage;
-
 }

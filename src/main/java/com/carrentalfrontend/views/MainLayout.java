@@ -2,14 +2,12 @@ package com.carrentalfrontend.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
@@ -21,34 +19,53 @@ public class MainLayout extends AppLayout {
     }
 
     private void createHeader() {
-        H4 logo = new H4("System wypożyczeń");
-        logo.addClassNames("text-l", "m-m");
 
-//        logo.addClassNames(LumoUtility.FontSize.XXSMALL, LumoUtility.Background.PRIMARY_10);
+        Image imageLogo = new Image("images/logo.png", "My logo image");
+        imageLogo.addClassNames(LumoUtility.Margin.AUTO);
 
-
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), imageLogo);
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        header.expand(logo);
         header.setWidthFull();
-//        header.addClassNames("py-0", "px-m");
 
-        header.addClassNames(LumoUtility.Background.SUCCESS_10);
-//        header.add(myapp);
+        header.addClassNames("header",
+                LumoUtility.Background.PRIMARY_10
+                );
 
         addToNavbar(header);
     }
 
     private void createDrawer() {
-        RouterLink carRentalView = new RouterLink("Aktualne \nwypożyczenia", CarRentalView.class);
-        carRentalView.setHighlightCondition(HighlightConditions.sameLocation());
+        addClassNames("drawer");
 
-        carRentalView.addClassNames(LumoUtility.Background.CONTRAST_5);
+        Icon mainViewIcon = new Icon(VaadinIcon.CALENDAR);
+        Icon carIcon = new Icon(VaadinIcon.CAR);
+        Icon carRentalsViewIcon = new Icon(VaadinIcon.FILE_SEARCH);
+        Icon clientViewIcon = new Icon(VaadinIcon.USER_CARD);
+        mainViewIcon.addClassNames("mainViewIcon");
+        carIcon.addClassNames("carIcon");
+        carRentalsViewIcon.addClassNames("carRentalsViewIcon");
+        clientViewIcon.addClassNames("clientViewIcon");
+
+        RouterLink mainView = new RouterLink("", MainView.class);
+        mainView.add(mainViewIcon);
+        RouterLink carView = new RouterLink("", CarView.class);
+        carView.add(carIcon);
+        RouterLink carRentalsView = new RouterLink("", CarRentalsView.class);
+        carRentalsView.add(carRentalsViewIcon);
+        RouterLink clientView = new RouterLink("", ClientView.class);
+        clientView.add(clientViewIcon);
+
+//        mainView.setHighlightCondition(HighlightConditions.sameLocation());
+//        carView.setHighlightCondition(HighlightConditions.sameLocation());
+//        carRentalsView.setHighlightCondition(HighlightConditions.sameLocation());
+//        clientView.setHighlightCondition(HighlightConditions.sameLocation());
 
         addToDrawer(new VerticalLayout(
-                carRentalView
+                mainView,
+                carView,
+                carRentalsView,
+                clientView
         ));
-
     }
 }
